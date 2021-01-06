@@ -1,7 +1,8 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Entity, PrimaryGeneratedColumn, Unique } from "typeorm";
 import { UserStatusEnum } from './enums/user-status.enum';
 
 @Entity()
+@Unique(['username',"email"])
 export class User extends BaseEntity {
 
     @PrimaryGeneratedColumn()
