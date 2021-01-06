@@ -1,5 +1,7 @@
-import { BaseEntity, Column, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { UserStatusEnum } from './enums/user-status.enum';
 
+@Entity()
 export class User extends BaseEntity {
 
     @PrimaryGeneratedColumn()
@@ -10,4 +12,10 @@ export class User extends BaseEntity {
 
     @Column()
     password: string;
+
+    @Column()
+    email:string;
+
+    @Column()
+    status:UserStatusEnum
 }
