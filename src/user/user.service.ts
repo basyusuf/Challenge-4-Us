@@ -16,7 +16,6 @@ export class UserService {
 
     async signIn(loginUserDto:LoginUserDto){
         const username = await this.userRepository.validateUserPassword(loginUserDto)
-
         if(!username){
             throw new UnauthorizedException('Invalid credentials')
         } else{
