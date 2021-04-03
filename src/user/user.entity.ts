@@ -1,13 +1,15 @@
 import { BaseEntity, BeforeInsert, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 import { UserStatusEnum } from './enums/user-status.enum';
 import * as bcrypt from 'bcryptjs';
+import * as jwt from 'jsonwebtoken';
+import { serverConfig } from '../config/server.config';
 @Entity('user')
 export class User extends BaseEntity {
 
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({nullable:true})
+    @Column()
     account_name:string;
 
     @Column({unique:true,length:50})
@@ -19,7 +21,7 @@ export class User extends BaseEntity {
     @Column({length:70,unique:true})
     email:string;
 
-    @Column({nullable:true,default:'/images/default.png'})
+    @Column({nullable:true,default:'/man.png'})
     image:string;
 
     @Column({nullable:true})
@@ -36,10 +38,18 @@ export class User extends BaseEntity {
         let salt = await bcrypt.genSalt(10);
         let password = await bcrypt.hash(this.password,salt);
         this.password = password;
+        if(!this.account_name){
+            this.account_name = this.username;
+        }
     }
 
     async validatePassword(attempt:string):Promise<boolean>{
         const compareStatus = await bcrypt.compare(attempt,this.password);
         return compareStatus;
+    }
+
+    generateUserToken():string{
+        let token = jwt.sign({id:this.id},serverConfig.secret_key,{expiresIn:serverConfig.expire_time});
+        return token;
     }
 }
