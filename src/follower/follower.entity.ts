@@ -1,8 +1,8 @@
-import { BaseEntity, Column, CreateDateColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-import { FollowerStatusEnum } from "./enums/follower-status";
+import { BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { FollowerStatusEnum } from "./enums/follower-status.enum";
 
-
-class Follower extends BaseEntity{
+@Entity('follower')
+export class Follower extends BaseEntity{
     @PrimaryGeneratedColumn()
     id:number;
 

@@ -8,6 +8,7 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { ChallengeModule } from './challenge/challenge.module';
 import { FollowerModule } from './follower/follower.module';
+import { ActivityModule } from './activity/activity.module';
 
 console.log("URL:",join(__dirname, '..', 'public'))
 @Module({
@@ -18,7 +19,8 @@ console.log("URL:",join(__dirname, '..', 'public'))
     }),
     UserModule,
     ChallengeModule,
-    FollowerModule
+    FollowerModule,
+    ActivityModule
   ],
   controllers: [AppController],
   providers: [AppService],
