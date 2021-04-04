@@ -6,8 +6,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { typeOrmConfig } from './config/typeorm.config';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
-import { ChallengeController } from './challenge/challenge.controller';
 import { ChallengeModule } from './challenge/challenge.module';
+import { FollowerModule } from './follower/follower.module';
 
 console.log("URL:",join(__dirname, '..', 'public'))
 @Module({
@@ -17,7 +17,8 @@ console.log("URL:",join(__dirname, '..', 'public'))
       rootPath: join(__dirname, '..', 'public'),
     }),
     UserModule,
-    ChallengeModule
+    ChallengeModule,
+    FollowerModule
   ],
   controllers: [AppController],
   providers: [AppService],
