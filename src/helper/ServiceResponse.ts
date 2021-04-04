@@ -1,3 +1,4 @@
+import { HttpException } from "@nestjs/common";
 export interface IServiceResponse {
     statusCode:number;
     message?:string | string[];
@@ -20,6 +21,9 @@ export class ServiceResponse implements IServiceResponse {
         if(responseData.data){
             this.data = responseData.data;
         }
+        return this;
+    }
+    get(){
         return this;
     }
 }

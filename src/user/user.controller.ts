@@ -1,4 +1,4 @@
-import { Controller, Post, ValidationPipe } from '@nestjs/common';
+import { Controller, HttpCode, HttpException, Post, ValidationPipe } from '@nestjs/common';
 import { User } from './user.entity';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -11,12 +11,13 @@ export class UserController {
     constructor(private userService:UserService){}
 
     @Post('/signup')
-    async signUp(@Body(ValidationPipe) requestBody:CreateUserDto):Promise<ServiceResponse>{
+    async signUp(@Body(ValidationPipe) requestBody:CreateUserDto){
         return this.userService.signUp(requestBody);
     }
 
     @Post('/signin')
-    async signIn(@Body(ValidationPipe) requestBody:LoginUserDto):Promise<ServiceResponse>{
+    @HttpCode(200)
+    async signIn(@Body(ValidationPipe) requestBody:LoginUserDto){
         return this.userService.signIn(requestBody);
     }
 }
