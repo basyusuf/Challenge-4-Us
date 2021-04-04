@@ -9,6 +9,7 @@ import { join } from 'path';
 import { ChallengeModule } from './challenge/challenge.module';
 import { FollowerModule } from './follower/follower.module';
 import { ActivityModule } from './activity/activity.module';
+import { InviteModule } from './invite/invite.module';
 
 console.log("URL:",join(__dirname, '..', 'public'))
 @Module({
@@ -20,7 +21,8 @@ console.log("URL:",join(__dirname, '..', 'public'))
     UserModule,
     ChallengeModule,
     FollowerModule,
-    ActivityModule
+    ActivityModule,
+    InviteModule
   ],
   controllers: [AppController],
   providers: [AppService],
